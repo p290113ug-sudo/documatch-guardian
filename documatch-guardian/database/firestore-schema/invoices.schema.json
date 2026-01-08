@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_id": { "type": "string", "format": "uuid" },
+    "user_id": { "type": "string" },
+    "organization_id": { "type": "string" },
+    "upload_timestamp": { "type": "string", "format": "date-time" },
+    "original_filename": { "type": "string" },
+    "storage_path": { "type": "string" },
+    "processing_status": {
+      "type": "string",
+      "enum": ["pending", "extracted", "tier1_complete", "tier2_complete", "tier3_complete", "error"]
+    },
+    "extracted_data": {
+      "type": "object",
+      "properties": {
+        "vendor_name": { "type": ["string", "null"] },
+        "invoice_number": { "type": ["string", "null"] },
+        "invoice_amount": { "type": ["number", "null"] },
+        "invoice_date": { "type": ["string", "null"], "format": "date" },
+        "payment_terms": { "type": ["string", "null"] },
+        "due_date": { "type": ["string", "null"], "format": "date" },
+        "bank_account_number": { "type": ["string", "null"] },
+        "routing_number": { "type": ["string", "null"] },
+        "bank_name": { "type": ["string", "null"] }
+      }
+    },
+    "tier1_match": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "enum": ["matched", "unmatched", "pending"] },
+        "transaction_id": { "type": "string" },
+        "confidence_score": { "type": "number" },
+        "matched_date": { "type": "string", "format": "date-time" },
+        "renamed_file_path": { "type": "string" }
+      }
+    },
+    "tier2_payment": {
+      "type": "object",
+      "properties": {
+        "net_days": { "type": "integer" },
+        "optimal_payment_date": { "type": "string", "format": "date" },
+        "discount_rate": { "type": "number" },
+        "discount_deadline": { "type": "string", "format": "date" },
+        "potential_savings": { "type": "number" }
+      }
+    },
+    "tier3_fraud": {
+      "type": "object",
+      "properties": {
+        "verification_status": { "type": "string", "enum": ["approved", "flagged", "pending"] },
+        "risk_score": { "type": "number" },
+        "alert_id": { "type": "string" },
+        "verified_by": { "type": "string" },
+        "verified_date": { "type": "string", "format": "date-time" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "required": ["invoice_id", "user_id", "organization_id", "upload_timestamp", "original_filename", "storage_path", "processing_status"]
+}

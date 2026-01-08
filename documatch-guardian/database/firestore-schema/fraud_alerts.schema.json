@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Fraud Alert",
+    "type": "object",
+    "properties": {
+        "alert_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "severity": {
+            "type": "string",
+            "enum": [
+                "critical",
+                "warning",
+                "info"
+            ]
+        },
+        "invoice_id": {
+            "type": "string"
+        },
+        "vendor_name": {
+            "type": "string"
+        },
+        "expected_account": {
+            "type": "string"
+        },
+        "detected_account": {
+            "type": "string"
+        },
+        "risk_score": {
+            "type": "number"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "pending_review",
+                "resolved",
+                "dismissed"
+            ]
+        },
+        "assigned_to": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "resolution_notes": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "alert_id",
+        "timestamp",
+        "severity",
+        "invoice_id",
+        "status"
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Organization",
+    "type": "object",
+    "properties": {
+        "organization_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "name": {
+            "type": "string"
+        },
+        "subscription_tier": {
+            "type": "string",
+            "enum": [
+                "tier1",
+                "tier2",
+                "tier3"
+            ]
+        },
+        "stripe_customer_id": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "members": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "settings": {
+            "type": "object",
+            "properties": {
+                "invoice_email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "webhook_url": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            }
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "required": [
+        "organization_id",
+        "name",
+        "subscription_tier"
+    ]
+}
