@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Trusted Vendor",
+    "type": "object",
+    "properties": {
+        "vendor_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "organization_id": {
+            "type": "string"
+        },
+        "vendor_name": {
+            "type": "string"
+        },
+        "vendor_aliases": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "trusted_bank_accounts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "account_number": {
+                        "type": "string"
+                    },
+                    "routing_number": {
+                        "type": "string"
+                    },
+                    "bank_name": {
+                        "type": "string"
+                    },
+                    "beneficiary_name": {
+                        "type": "string"
+                    },
+                    "verified_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "verification_method": {
+                        "type": "string",
+                        "enum": [
+                            "manual",
+                            "ocr",
+                            "import",
+                            "approved_invoice"
+                        ]
+                    },
+                    "approval_count": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "account_number",
+                    "verification_method"
+                ]
+            }
+        },
+        "alert_contacts": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "email"
+            }
+        },
+        "last_invoice_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "total_invoices_processed": {
+            "type": "integer"
+        },
+        "risk_score": {
+            "type": "number"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "active",
+                "flagged",
+                "blocked"
+            ]
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "required": [
+        "vendor_id",
+        "organization_id",
+        "vendor_name",
+        "status"
+    ]
+}

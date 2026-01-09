@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Subscription",
+    "type": "object",
+    "properties": {
+        "subscription_id": {
+            "type": "string"
+        },
+        "organization_id": {
+            "type": "string"
+        },
+        "stripe_subscription_id": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "active",
+                "past_due",
+                "canceled",
+                "incomplete"
+            ]
+        },
+        "current_period_end": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "tier": {
+            "type": "string",
+            "enum": [
+                "tier1",
+                "tier2",
+                "tier3"
+            ]
+        },
+        "plan_id": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "organization_id",
+        "status",
+        "tier"
+    ]
+}

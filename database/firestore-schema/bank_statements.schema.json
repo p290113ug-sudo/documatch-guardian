@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Bank Statement",
+    "type": "object",
+    "properties": {
+        "statement_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "organization_id": {
+            "type": "string"
+        },
+        "upload_timestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "filename": {
+            "type": "string"
+        },
+        "storage_path": {
+            "type": "string"
+        },
+        "date_range_start": {
+            "type": "string",
+            "format": "date"
+        },
+        "date_range_end": {
+            "type": "string",
+            "format": "date"
+        },
+        "transactions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "transaction_id": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "category": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "required": [
+                    "date",
+                    "description",
+                    "amount"
+                ]
+            }
+        },
+        "processed": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "statement_id",
+        "organization_id",
+        "transactions"
+    ]
+}
